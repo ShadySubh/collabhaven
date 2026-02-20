@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollabHaven | Talent + Brand Partnership Agency</title>
+    <meta name="description"
+        content="CollabHaven is a new-age Talent + Brand Partnership Agency in the creator economy. Bold, experimental, and premium.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        background: '#09090b', // Zinc 950
+                        foreground: '#fafafa', // Zinc 50
+                        primary: '#8b5cf6', // Violet 500
+                        secondary: '#ec4899', // Pink 500
+                        accent: '#14b8a6', // Teal 500
+                        surface: 'rgba(255, 255, 255, 0.05)',
+                        'surface-hover': 'rgba(255, 255, 255, 0.1)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(20px) rotate(-2deg)' },
+                        },
+                        'float-slow': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #fafafa;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #8b5cf6, #ec4899);
+        }
+
+        .text-gradient-blue {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #3b82f6, #14b8a6);
+        }
+
+        /* Background Ripple Container */
+        #background-ripple {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
+        }
+
+        .ripple-box {
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background-color 0.5s ease, transform 0.2s ease, border-color 0.5s ease;
+        }
+
+        /* Manifesto Text */
+        .manifesto-text {
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <!-- Background Animation Container -->
+    <div id="background-ripple"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full glass border-b border-white/5"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div
+                    class="relative w-10 h-10 overflow-hidden rounded-xl bg-white/5 p-1 group-hover:bg-white/10 transition-colors">
+                    <img src="assets/logo.png" alt="CollabHaven Logo"
+                        class="w-full h-full object-contain filter group-hover:brightness-110 transition-all" />
+                </div>
+                <span class="font-display font-bold text-xl tracking-tight">CollabHaven</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">About</a>
+                <a href="#services"
+                    class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Services</a>
+                <a href="#brands" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">For
+                    Brands</a>
+                <a href="#creators" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">For
+                    Creators</a>
+            </div>
+
+            <a href="#contact"
+                class="hidden md:inline-flex px-5 py-2.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-colors">
+                Get Started
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white p-2" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden glass absolute top-full left-0 w-full p-6 flex flex-col gap-4 border-b border-white/5"
+            id="mobile-menu">
+            <a href="#about" class="text-zinc-400 hover:text-white">About</a>
+            <a href="#services" class="text-zinc-400 hover:text-white">Services</a>
+            <a href="#brands" class="text-zinc-400 hover:text-white">For Brands</a>
+            <a href="#creators" class="text-zinc-400 hover:text-white">For Creators</a>
+            <a href="#contact"
+                class="px-5 py-2.5 rounded-full bg-white text-black font-semibold text-sm text-center">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="hero">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-background to-background z-0 pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 bg-primary/5 text-primary text-sm font-medium mb-8 animate-float">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                The Future of Creator Partnerships
+            </div>
+
+            <h1 class="font-display font-bold text-6xl md:text-8xl tracking-tighter mb-6 leading-[0.9]">
+                Where Talent Meets <br />
+                <span class="text-gradient">Brand Harmony.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                We're the new-age agency bridging the gap between breakout creators and forward-thinking brands.
+                <span class="text-white font-medium">Bold. Experimental. Premium.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#contact"
+                    class="px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+                    Start Collaborating
+                </a>
+                <a href="#about"
+                    class="px-8 py-4 rounded-full glass hover:bg-white/10 transition-colors font-medium text-lg flex items-center gap-2">
+                    Explore Our Vibe <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Floating Elements -->
+            <!-- Floating Elements (Repositioned for non-overlap) -->
+            <!-- Element 1: Top Left - Growth -->
+            <div class="absolute top-[15%] left-[5%] hidden xl:block animate-[float_8s_ease-in-out_infinite]">
+                <div
+                    class="glass-card p-4 rounded-2xl flex items-center gap-3 rotate-[-6deg] hover:rotate-0 transition-transform cursor-default">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-xl shadow-lg shadow-purple-500/20">
+                        🚀</div>
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Growth</div>
+                        <div class="font-bold text-sm text-white">+240% Reach</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Element 2: Bottom Right - Engagement -->
+            <div class="absolute bottom-[20%] right-[5%] hidden xl:block animate-[float-reverse_9s_ease-in-out_infinite]"
+                style="animation-delay: 1s;">
+                <div
+                    class="glass-card p-4 rounded-2xl flex items-center gap-3 rotate-[6deg] hover:rotate-0 transition-transform cursor-default">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-xl shadow-lg shadow-pink-500/20">
+                        ❤️</div>
+                    <div>
+                        <div class="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Engagement</div>
+                        <div class="font-bold text-sm text-white">4.2M Views</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Element 3: Top Right/Mid - Creator Match (New) -->
+            <div class="absolute top-[25%] right-[8%] hidden xl:block animate-[float_10s_ease-in-out_infinite]"
+                style="animation-delay: 2s;">
+                <div
+                    class="glass-card p-3 rounded-2xl flex items-center gap-3 rotate-[3deg] hover:rotate-0 transition-transform cursor-default">
+                    <div class="flex -space-x-2 overflow-hidden">
+                        <div
+                            class="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center text-xs">
+                            🦁</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center text-xs">
+                            🎨</div>
+                        <div
+                            class="w-8 h-8 rounded-full bg-zinc-800 border-2 border-black flex items-center justify-center text-xs">
+                            🎧</div>
+                    </div>
+                    <div class="pr-2">
+                        <div class="text-xs text-green-400 font-bold flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Match Found
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-24 relative" id="about">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div
+                        class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary opacity-30 blur-2xl rounded-full">
+                    </div>
+                    <div class="relative glass-card rounded-3xl p-8 md:p-12 overflow-hidden">
+                        <div class="absolute top-0 right-0 p-8 opacity-20">
+                            <i data-lucide="zap" class="w-24 h-24"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl mb-4">Not Your Average Agency</h3>
+                        <p class="text-zinc-400 leading-relaxed mb-6">
+                            We don't do boring. We operate at the intersection of culture, technology, and storytelling.
+                            CollabHaven is built for the era of the creator, where authenticity rules and impact is
+                            measured in movements, not just impressions.
+                        </p>
+                        <div class="flex gap-2">
+                            <div class="px-3 py-1 rounded-full bg-white/5 text-xs border border-white/10">🤖 High-Tech
+                            </div>
+                            <div class="px-3 py-1 rounded-full bg-white/5 text-xs border border-white/10">🎨 Creative
+                                First</div>
+                            <div class="px-3 py-1 rounded-full bg-white/5 text-xs border border-white/10">🌐 Global
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">We curate <span
+                            class="text-gradient-blue">digital magic.</span></h2>
+                    <p class="text-lg text-zinc-400 mb-8">
+                        Traditional marketing is dead. The future is collaborative. We unite visionary brands with the
+                        world's most electrifying creators to build campaigns that actually matter.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Data-Driven Creativity</h4>
+                                <p class="text-sm text-zinc-500">We use advanced analytics to find the perfect match.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mt-1">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Authentic Storytelling</h4>
+                                <p class="text-sm text-zinc-500">No scripts. Just real voices and real impact.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-24 bg-black/20" id="services">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Our <span class="text-gradient">Core
+                        Powers</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto">Everything you need to dominate the feed.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Talent Management</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        We represent the weird, the wonderful, and the wildly talented. Full-stack career growth for
+                        modern creators.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-lucide="briefcase" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Brand Partnerships</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Connecting brands with the right voices. Campaign strategy, negotiation, and execution handled
+                        flawlessly.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Content Strategy</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Data-backed content roadmaps that keep audiences hooked and algorithms happy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Brands & Creators Split -->
+    <section class="py-24" id="brands">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Brands -->
+            <div class="flex flex-col md:flex-row items-center gap-12 mb-32">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <div class="relative aspect-video rounded-3xl overflow-hidden glass border border-white/10 group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
+
+                        <!-- Richer Visual Composition -->
+                        <div class="absolute inset-0 p-8 flex flex-col justify-center items-center">
+                            <!-- Main Card -->
+                            <div
+                                class="glass-card w-full max-w-sm rounded-xl p-5 relative z-10 border border-white/5 bg-black/40 backdrop-blur-xl">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div class="text-[10px] text-zinc-500 font-mono">LIVE CAMPAIGN</div>
+                                </div>
+                                <div class="h-24 flex items-end justify-between gap-1 mb-4">
+                                    <div
+                                        class="w-full bg-primary/20 rounded-t-sm h-[40%] relative group-hover:h-[60%] transition-all duration-500">
+                                        <div class="absolute top-0 w-full h-1 bg-primary/50"></div>
+                                    </div>
+                                    <div
+                                        class="w-full bg-primary/20 rounded-t-sm h-[60%] relative group-hover:h-[80%] transition-all duration-500 delay-75">
+                                        <div class="absolute top-0 w-full h-1 bg-primary/50"></div>
+                                    </div>
+                                    <div
+                                        class="w-full bg-primary/20 rounded-t-sm h-[50%] relative group-hover:h-[90%] transition-all duration-500 delay-100">
+                                        <div class="absolute top-0 w-full h-1 bg-primary/50"></div>
+                                    </div>
+                                    <div
+                                        class="w-full bg-primary/20 rounded-t-sm h-[75%] relative group-hover:h-[50%] transition-all duration-500 delay-150">
+                                        <div class="absolute top-0 w-full h-1 bg-primary/50"></div>
+                                    </div>
+                                    <div
+                                        class="w-full bg-accent/20 rounded-t-sm h-[90%] relative group-hover:h-[100%] transition-all duration-500 delay-200">
+                                        <div
+                                            class="absolute top-0 w-full h-1 bg-accent shadow-[0_0_10px_rgba(20,184,166,0.5)]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-2 border-t border-white/5">
+                                    <div>
+                                        <div class="text-xs text-zinc-400">Total Reach</div>
+                                        <div class="font-bold text-lg">8.4M+</div>
+                                    </div>
+                                    <div class="px-2 py-1 rounded bg-green-500/10 text-green-400 text-xs font-bold">
+                                        +124%</div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge 1 -->
+                            <div
+                                class="absolute top-10 right-10 glass-card p-2 rounded-lg flex items-center gap-2 animate-[float-slow_6s_ease-in-out_infinite]">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-[10px]">
+                                    👍</div>
+                                <div class="text-xs font-bold">Verified</div>
+                            </div>
+
+                            <!-- Floating Badge 2 -->
+                            <div class="absolute bottom-10 left-10 glass-card p-2 rounded-lg flex items-center gap-2 animate-[float-slow_7s_ease-in-out_infinite]"
+                                style="animation-delay: 1.5s;">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center text-[10px]">
+                                    ⭐</div>
+                                <div class="text-xs font-bold">Top Tier</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 order-1 md:order-2">
+                    <span class="text-primary font-bold tracking-wider text-sm uppercase mb-2 block">For Brands</span>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Amplify Your <br /> Voice.</h2>
+                    <p class="text-zinc-400 mb-8 text-lg">
+                        Reach audiences where they actually live. We craft bespoke campaigns that feel native, organic,
+                        and unskippable.
+                    </p>
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors">
+                        Partner with us <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Creators -->
+            <div class="flex flex-col md:flex-row items-center gap-12" id="creators">
+                <div class="w-full md:w-1/2">
+                    <span class="text-secondary font-bold tracking-wider text-sm uppercase mb-2 block">For
+                        Creators</span>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Monetize Your <br /> Genius.</h2>
+                    <p class="text-zinc-400 mb-8 text-lg">
+                        You create the culture. We handle the business. Get access to premium brand deals, legal
+                        support, and growth strategy.
+                    </p>
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 text-white font-semibold hover:text-secondary transition-colors">
+                        Join the roster <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="relative aspect-video rounded-3xl overflow-hidden glass border border-white/10">
+                        <div class="absolute inset-0 bg-gradient-to-tl from-secondary/20 to-transparent"></div>
+                        <!-- Abstract Graphic Placeholder -->
+                        <!-- Richer Visual: Creator Ecosystem -->
+                        <div class="absolute inset-0 p-8 flex items-center justify-center">
+                            <!-- Profile Card -->
+                            <div
+                                class="glass-card w-64 p-4 rounded-2xl relative z-10 border border-white/10 rotate-[-3deg] group-hover:rotate-0 transition-transform bg-black/40 backdrop-blur-xl">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 to-pink-500 p-[2px]">
+                                        <div
+                                            class="w-full h-full rounded-full bg-black flex items-center justify-center text-xs">
+                                            📸</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-bold">Sarah.Creates</div>
+                                        <div class="text-[10px] text-zinc-400">Lifestyle • Travel</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="p-2 rounded-lg bg-white/5 flex items-center justify-between">
+                                        <span class="text-[10px] text-zinc-400">New Deal</span>
+                                        <span class="text-xs font-bold text-white">$4,500</span>
+                                    </div>
+                                    <div class="p-2 rounded-lg bg-white/5 flex items-center justify-between">
+                                        <span class="text-[10px] text-zinc-400">Affiliate</span>
+                                        <span class="text-xs font-bold text-white">$1,200</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Bubble -->
+                            <div
+                                class="absolute top-1/4 left-10 md:left-20 glass-card px-3 py-2 rounded-lg flex items-center gap-2 animate-[float_5s_ease-in-out_infinite]">
+                                <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></div>
+                                <div class="text-xs font-bold">Brand Offer</div>
+                            </div>
+
+                            <!-- Stats Bubble -->
+                            <div
+                                class="absolute bottom-1/3 right-10 md:right-16 glass-card px-3 py-2 rounded-lg flex flex-col items-center animate-[float-reverse_6s_ease-in-out_infinite] delay-100">
+                                <div class="text-[10px] text-zinc-500 uppercase">Avg. Views</div>
+                                <div class="text-sm font-bold text-gradient">250K+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 relative overflow-hidden" id="contact">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-display font-bold text-5xl md:text-7xl mb-8 tracking-tighter">Ready to <span
+                    class="text-gradient">Break the Internet?</span></h2>
+            <p class="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto">
+                Whether you're a brand looking for impact or a creator looking for growth, CollabHaven is your home.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                    class="px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:scale-105 transition-transform">
+                    Get Started Now
+                </button>
+                <button class="px-8 py-4 rounded-full glass hover:bg-white/10 transition-colors font-medium text-lg">
+                    Book a Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-black pt-24 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 mb-24">
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-8">
+                        <div class="relative w-8 h-8 overflow-hidden rounded-lg bg-white/5 p-1">
+                            <img src="assets/logo.png" alt="CollabHaven Logo"
+                                class="w-full h-full object-contain brightness-100" />
+                        </div>
+                        <span class="font-display font-bold text-xl tracking-tight">CollabHaven</span>
+                    </a>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors"><i
+                                data-lucide="twitter" class="w-5 h-5"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors"><i
+                                data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors"><i
+                                data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-end text-right">
+                    <!-- Manifesto -->
+                    <div
+                        class="manifesto-text font-display font-black text-4xl md:text-6xl uppercase tracking-tighter opacity-80">
+                        <div class="text-zinc-600 hover:text-white transition-colors cursor-default">New-age Media</div>
+                        <div class="text-zinc-500 hover:text-white transition-colors cursor-default">Breakout Stories
+                        </div>
+                        <div class="text-gradient hover:opacity-100 transition-opacity cursor-default">All-Star Creators
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center text-sm text-zinc-600 pt-8 border-t border-white/5">
+                <p>&copy; 2026 CollabHaven Agency. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-zinc-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-zinc-400">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
